@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/naminho/fancy-proxy/master/logo.png?sanitize=true" alt="Fancy Proxy">
+  <img src="https://raw.githubusercontent.com/naminho/fancy-proxy/master/logo.png" alt="Fancy Proxy">
 </p>
 
 # fancy-proxy
