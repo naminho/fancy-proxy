@@ -1,15 +1,13 @@
-export const counter = () => ({
-  count: 1,
-  increment: jest.fn((target, path, type) => {
-    target.count += 1
-  })
+export const counter = (mockIncrement) => ({
+  increment: mockIncrement
 })
 
-export const nested = () => ({
-  count: 1,
-  increment: () => {},
+export const nested = (mockIncrement, mockDecrement, mockIncrement2, mockDecrement2) => ({
+  increment: mockIncrement,
+  decrement: mockDecrement,
   nested: {
     count: 2,
-    increment: () => {}
+    increment: mockIncrement2,
+    decrement: mockDecrement2
   }
 })

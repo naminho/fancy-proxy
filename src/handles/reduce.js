@@ -1,27 +1,32 @@
-import get from 'lodash.get'
+import path from './../path'
 
 // Only return the handles matching the path, return match if value found.
-module.exports = (app, handles) => {
+export default (app, handles) => {
   const remaining = [] // Stores handles with path on them.
   let match // Set, if value found matching the path exactly.
 
-  handles.forEach((handle) => {
-    const target = handle[0] // Object defining available handles.
-    const handler = handle[1] // Function to be called for this handle.
-    const value = get(target, app.path)
+  handles.forEach(handle => {
+    const {
+      handler, // Object defining available handles.
+      target // Function to be called for this handle.
+    } = handle
+    const value = path().find(target)
 
     if (typeof value === 'undefined') {
       return // Path not found on this handle.
     }
 
+    // Replace last path token, since now found on the handle.
+    path().replace(target)
+
     handle = {
       handler,
-      value,
-      target
+      target,
+      value
     }
 
     // Objects can be further accessed, return only first match.
-    if (typeof value !== 'object' && typeof match !== 'number') {
+    if (typeof value !== 'object' && typeof match === 'undefined') {
       match = handle
     }
 

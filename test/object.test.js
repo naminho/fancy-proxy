@@ -1,24 +1,24 @@
-import fancyProxy from './..'
+import run from './utils/run'
 // Example objects with named depth.
 import { one, two, three } from './data/objects'
 
-test('Can access top-level property.', () => {
-  const proxy = fancyProxy(one(), {})
+run('Can access top-level property', (fallback, fancy) => {
+  const proxy = fancy(one(), {})
   expect(proxy.count).toEqual(1)
 })
 
-test('Can access second-level property.', () => {
-  const proxy = fancyProxy(two(), {})
+run('Can access second-level property', (fallback, fancy) => {
+  const proxy = fancy(two(), {})
   expect(proxy.nested.count).toEqual(2)
 })
 
-test('Can access low-level property.', () => {
-  const proxy = fancyProxy(three(), {})
+run('Can access low-level property', (fallback, fancy) => {
+  const proxy = fancy(three(), {})
   expect(proxy.nested.nested.count).toEqual(3)
 })
 
-test('Can access properties from multiple objects.', () => {
-  const proxy = fancyProxy([one(), two(), three()], {})
+run('Can access properties from multiple objects', (fallback, fancy) => {
+  const proxy = fancy([one(), two(), three()], {})
   expect(proxy.count).toEqual(1)
   expect(proxy.nested.count).toEqual(2)
   expect(proxy.nested.nested.count).toEqual(3)

@@ -1,34 +1,52 @@
 import invariant from 'invariant'
 import isObject from 'is-object'
-import target from './target'
+import assign from 'object-assign'
+import invariants from './constants/invariants'
+import has from './utils/has'
+import mergeTarget from './target'
+import initializeHandles from './handles/initialize'
+import verifyHandles from './handles/verify'
 
-// Initialize the app context, checking a few invariants and setting defaults.
-module.exports = (args) => {
-  invariant(args.length === 2,
-    'Two arguments, an object and some options need to be passed to fancy-proxy.')
+// Parses the inputs, checks a few invariants, creates app context and sets defaults.
+export default (args) => {
+  if (process.env.NODE_ENV !== 'production') {
+    invariant(args.length === 2, invariants.arguments)
+  }
 
-  const references = args[0]
+  const target = args[0]
   const options = args[1] || {}
 
-  invariant(isObject(references) || Array.isArray(references),
-    'The first argument passed to fancy-proxy needs to be an object or an array')
-  invariant(isObject(options),
-    'The second argument (options) passed to fancy proxy needs to be an object.')
+  if (process.env.NODE_ENV !== 'production') {
+    invariant(isObject(target) || Array.isArray(target), invariants.firstArgument)
+    invariant(isObject(options), invariants.secondArgument)
+  }
+
+  options.immutable = options.immutable || {}
+
+  if (options.debug || process.env.NODE_ENV !== 'production') {
+    invariant(isObject(options.immutable), invariants.immutableOptionObject)
+  }
 
   const middleware = options.middleware || (() => {})
 
-  invariant(typeof middleware === 'function',
-    'The middleware option passed to fancy-proxy needs to be a function.')
-
-  const handles = options.handles || []
-
-  invariant(Array.isArray(handles),
-    'The handles option passed to fancy-proxy needs to be an array.')
-
-  return {
-    target: target(references),
-    path: '',
-    middleware,
-    handles
+  if (options.debug || process.env.NODE_ENV !== 'production') {
+    invariant(typeof middleware === 'function', invariants.middleware)
   }
+
+  const handles = initializeHandles(options.handles || [], options)
+
+  const app = {
+    middleware,
+    handles,
+    options
+  }
+
+  app.target = mergeTarget(app, target)
+  app.target.__fancyProxy = true
+
+  if ((options.debug || process.env.NODE_ENV !== 'production') && !options.ambiguous) {
+    verifyHandles(app)
+  }
+
+  return app
 }

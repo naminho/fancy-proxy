@@ -2,23 +2,40 @@
   "name": "fancy-proxy",
   "version": "0.1.0",
   "license": "MIT",
-  "main": "index.js",
+  "main": "build/fancy-proxy.js",
+  "umd:main": "build/fancy-proxy.umd.js",
   "description": "Interface Around a Proxied Object.",
   "repository": "github:naminho/fancy-proxy",
   "author": "Matthias Giger",
   "scripts": {
-    "test": "jest --watchAll"
+    "start": "microbundle watch --no-compress --output build --format cjs,umd",
+    "build": "microbundle --output build --format cjs,umd",
+    "test": "jest --watchAll",
+    "coverage": "jest --coverage"
   },
   "dependencies": {
-    "deepmerge": "3.0.0",
+    "deepmerge": "^3.2.0",
     "invariant": "2.2.4",
     "is-object": "1.0.1",
-    "lodash.get": "4.4.2"
+    "object-assign": "^4.1.1",
+    "traverse": "^0.6.6"
   },
   "devDependencies": {
-    "babel-core": "6.26.3",
-    "babel-jest": "23.6.0",
-    "babel-preset-env": "1.7.0",
-    "jest": "23.6.0"
-  }
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.1",
+    "babel-jest": "24.5.0",
+    "jest": "24.5.0",
+    "microbundle": "^0.11.0"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/test/jest.init.js"
+    ],
+    "moduleNameMapper": {
+      "fancy-proxy": "<rootDir>/src"
+    }
+  },
+  "files": [
+    "build"
+  ]
 }
