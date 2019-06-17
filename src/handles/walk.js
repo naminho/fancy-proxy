@@ -3,7 +3,6 @@ import traps from './handle-trap'
 import reduce from './reduce'
 import seal from './../seal'
 import call from './call'
-import path from './../path'
 
 let walk
 
@@ -26,7 +25,7 @@ walk = (app, handles) => {
       return call(app, value, handler)
     }
 
-    handler([], app.target, value, path(), read)
+    handler([], app.target, value, app.path, read)
     seal(app, value, read)
     return value
   }

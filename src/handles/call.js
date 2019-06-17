@@ -1,11 +1,10 @@
 import assign from 'object-assign'
-import { read, call } from './../constants/types'
+import { call } from './../constants/types'
 import seal from './../seal'
-import path from './../path'
 
 // Creates a new method, that will call the handle when called itself.
 export default (app, method, handler) => {
-  const outerPath = path().clear()
+  const outerPath = app.path.clear(app)
   return (...inputArgs) => {
     // NOTE that other paths may be created during this call.
     const returnValue = handler.call(null, inputArgs, app.target, method, outerPath, call)

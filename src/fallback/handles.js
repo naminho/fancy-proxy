@@ -1,7 +1,6 @@
 import traverse from 'traverse'
 import seal from './../seal'
 import call from './../handles/call'
-import path from './../path'
 
 // Traverse handle targets and override methods to call handler and middleware.
 export default (app) => {
@@ -24,7 +23,7 @@ export default (app) => {
           const currentPaths = paths[currentIndex]
           let currentTarget = target
           currentPaths.forEach(currentPath => {
-            path().add(currentPath, currentTarget)
+            app.path.add(currentPath, currentTarget)
             currentTarget = currentTarget[currentPath]
           })
           const returnValue = call(app, value, handler)(...inputArgs)

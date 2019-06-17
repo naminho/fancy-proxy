@@ -1,9 +1,8 @@
 import invariant from 'invariant'
 import isObject from 'is-object'
-import assign from 'object-assign'
 import invariants from './constants/invariants'
-import has from './utils/has'
 import mergeTarget from './target'
+import Path from './path'
 import initializeHandles from './handles/initialize'
 import verifyHandles from './handles/verify'
 
@@ -38,7 +37,8 @@ export default (args) => {
   const app = {
     middleware,
     handles,
-    options
+    options,
+    path: new Path()
   }
 
   app.target = mergeTarget(app, target)

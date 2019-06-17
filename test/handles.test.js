@@ -44,27 +44,6 @@ run('Handle will be called upon method access', (fallback, fancy) => {
   expect(mockHandle.mock.calls.length).toEqual(1)
 })
 
-run('Accessing non-existing values will have no effect', (fallback, fancy) => {
-  const mockHandle = jest.fn(handle)
-  const mockMiddleware = jest.fn()
-  const proxy = fancy({}, {
-    handles: [
-      [ one(), mockHandle ]
-    ],
-    middleware: mockMiddleware
-  })
-
-  proxy.nested
-  expect(mockHandle.mock.calls.length).toEqual(0)
-  expect(mockMiddleware.mock.calls.length).toEqual(0)
-
-  if (!fallback) {
-    proxy.nested.count
-    expect(mockHandle.mock.calls.length).toEqual(0)
-    expect(mockMiddleware.mock.calls.length).toEqual(0)
-  }
-})
-
 run('Functions on handles will be called in context', (fallback, fancy) => {
   const mockIncrement = jest.fn((target, path, type) => {
     return target.count += 1

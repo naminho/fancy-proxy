@@ -5,7 +5,8 @@ import seal from './../seal'
 export default (app, property, target) => {
   const value = target[property]
 
-  if (typeof value !== 'function') {
+  // If a method call is made to an array, return the prototype method.
+  if (typeof value !== 'function' || Array.isArray(target)) {
     return
   }
 

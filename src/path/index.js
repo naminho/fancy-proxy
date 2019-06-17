@@ -1,10 +1,7 @@
 import tokens from './tokens'
 import has from './../utils/has'
 
-// Globally accessible reference to current path.
-let instance
-
-class Path {
+export default class Path {
   // Create with an existing or new path.
   constructor(path) {
     this.path = path || []
@@ -59,13 +56,9 @@ class Path {
 
   // Resets the path while returning the old path.
   // Used to clear path for next access.
-  clear() {
-    const old = instance
-    instance = new Path()
+  clear(app) {
+    const old = app.path
+    app.path = new Path()
     return old
   }
 }
-
-instance = new Path()
-
-export default () => instance

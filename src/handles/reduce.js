@@ -1,5 +1,3 @@
-import path from './../path'
-
 // Only return the handles matching the path, return match if value found.
 export default (app, handles) => {
   const remaining = [] // Stores handles with path on them.
@@ -10,14 +8,14 @@ export default (app, handles) => {
       handler, // Object defining available handles.
       target // Function to be called for this handle.
     } = handle
-    const value = path().find(target)
+    const value = app.path.find(target)
 
     if (typeof value === 'undefined') {
       return // Path not found on this handle.
     }
 
     // Replace last path token, since now found on the handle.
-    path().replace(target)
+    app.path.replace(target)
 
     handle = {
       handler,

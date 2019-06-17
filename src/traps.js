@@ -1,4 +1,3 @@
-import path from './path'
 import has from './utils/has'
 import notFound from './utils/not-found'
 import log from './check/log'
@@ -16,7 +15,7 @@ const traps = (app) => ({
     if (apply = log(app, property, target, receiver)) {
       return apply
     }
-    path().add(property, target)
+    app.path.add(property, target)
 
     try {
       // Avoid creating proxy for a function, as this doesn't work.

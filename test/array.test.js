@@ -52,3 +52,18 @@ run('Can access properties from multiple objects', (fallback, fancy) => {
   expect(proxy[2][0]).toEqual('one')
   expect(proxy[4].nested[2][0]).toEqual(3)
 })
+
+run('Can access array prototype methods on a fancy-proxied array', (fallback, fancy) => {
+  const proxy = fancy({
+    array: [1, 2, 3] 
+  })
+
+  const array = proxy.array
+
+  expect(array).toEqual([1, 2, 3])
+  expect(array.length).toEqual(3)
+
+  const mapped = array.map(item => (item))
+
+  expect(mapped).toEqual([1, 2, 3])
+})
