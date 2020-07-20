@@ -3,13 +3,14 @@
   "scripts": {
     "start": "npm run copy:src && jetpack",
     "build": "npm run copy:src && jetpack build",
-    "copy:src": "cp -a ../src ."
+    "copy:src": "cp -a ../src .",
+    "local": "npm install --no-save $(npm pack ../.. | tail -1)"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.0",
-    "fancy-proxy": "^0.1.0",
-    "jetpack": "^0.14.0",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "@babel/polyfill": "^7.10.4",
+    "fancy-proxy": "^0.1.1",
+    "jetpack": "^0.18.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }

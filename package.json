@@ -1,31 +1,31 @@
 {
   "name": "fancy-proxy",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "build/fancy-proxy.js",
   "umd:main": "build/fancy-proxy.umd.js",
   "description": "Interface Around a Proxied Object.",
-  "repository": "github:naminho/fancy-proxy",
+  "repository": "github:tobua/fancy-proxy",
   "author": "Matthias Giger",
   "scripts": {
-    "start": "microbundle watch --no-compress --output build --format cjs,umd",
-    "build": "microbundle --output build --format cjs,umd",
+    "start": "microbundle watch --no-compress --format cjs,umd",
+    "build": "microbundle --format cjs,umd",
     "test": "jest --watchAll",
     "coverage": "jest --coverage"
   },
   "dependencies": {
-    "deepmerge": "^3.2.0",
+    "deepmerge": "^4.2.2",
     "invariant": "2.2.4",
     "is-object": "1.0.1",
     "object-assign": "^4.1.1",
     "traverse": "^0.6.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.1",
-    "babel-jest": "24.5.0",
-    "jest": "24.5.0",
-    "microbundle": "^0.11.0"
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "babel-jest": "26.1.0",
+    "jest": "26.1.0",
+    "microbundle": "^0.12.3"
   },
   "jest": {
     "setupFiles": [

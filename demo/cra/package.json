@@ -3,14 +3,15 @@
   "scripts": {
     "start": "npm run copy:src && react-scripts start",
     "build": "npm run copy:src && react-scripts build",
-    "copy:src": "cp -a ../src ."
+    "copy:src": "cp -a ../src .",
+    "local": "npm install --no-save $(npm pack ../.. | tail -1)"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.0",
-    "fancy-proxy": "^0.1.0",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "@babel/polyfill": "^7.10.4",
+    "fancy-proxy": "^0.1.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1"
   },
   "eslintConfig": {
     "extends": "react-app"
